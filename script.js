@@ -55,7 +55,7 @@ function main(current_player)
   let name_tag = document.getElementById("name_pc");
   name_tag.innerText = `${current_player.name} (${current_player.age}) från ${current_player.house}`;
   name_tag.innerHTML += 
-  `<div style="display: flex; justify-content: space-between;">
+  `<div style="display: flex; justify-content: space-around;">
     <h6>Health: ${(current_player.abilityList[6]*3)} </h6>
     <h6>${current_player.armor} (AR: ${current_player.armor_rating})</h6>
     <h6>Combat Defense: ${(current_player.abilityList[0] + current_player.abilityList[2] +current_player.abilityList[3])} (+${current_player.shield}) </h6>
