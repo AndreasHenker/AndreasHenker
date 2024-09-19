@@ -1,0 +1,125 @@
+body {
+    background-color: darkgrey;
+}
+
+#battlemap {
+    display: grid;
+    grid-template-columns: 1032px;
+    grid-template-rows: 768px;
+    width: 1032px;
+    
+}
+
+#battlegrid {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(32, 1fr);
+    grid-template-rows: repeat(25, 1fr);
+}
+
+.battlesquare {
+    opacity: 0.2;
+    color: white;
+    border: rgb(243, 236, 236) 1px solid;
+}
+
+.battlesquare:hover{
+    opacity: 1;
+    background-color: red;
+}
+
+#player_layer{
+    
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(32, 1fr);
+    grid-template-rows: repeat(25, 1fr);
+    
+        z-index: 4;
+    opacity: .7;
+}
+
+.char {
+    border-radius: 50%;
+    color: white;
+    display: none;
+}
+
+#pc1 {
+    background-color: rgb(26, 70, 244);
+    grid-column: 2;
+    grid-row: 2;
+    
+}
+#npc1 {
+    background-color: red;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+
+
+#map {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+}
+
+
+#menu {
+    background-color: beige;
+    display: inline-block;
+}
+
+#joystick {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 200px;
+    height: 200px;
+}
+
+.joycontrol {
+    width: 50px;
+    height: 50px;
+}
+
+#up{
+    grid-column: 2;
+    grid-row: 1;
+}
+#down{
+    grid-column: 2;
+    grid-row: 3;
+}
+#left{
+    grid-column: 1;
+    grid-row: 2;
+    
+}
+#right{
+    grid-column: 3;
+    grid-row: 2;
+
+}
+#upleft{
+    grid-column: 1;
+    grid-row: 1;
+    
+}
+#upright{
+    grid-column: 3;
+    grid-row: 1;
+
+}
+#downleft{
+    grid-column: 1;
+    grid-row: 3;
+    
+}
+#downright{
+    grid-column: 3;
+    grid-row: 3;
+
+}
