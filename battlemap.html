@@ -853,14 +853,6 @@
         else{grid.style.display = "none";}
     }
 
-    function togglePCs(btn){
-        console.log(n_pc[current_turn]);
-        current_turn += 1;   
-        if(current_turn > n_pc.length-1){
-            current_turn = 0;
-        }
-        btn.textContent = n_pc[current_turn].textContent;
-    }
     function movePC(x = 1, y = 1, n_pc = "#pc1"){
         let pc = document.querySelector(n_pc).style;
         let pc_x = pc.gridColumn;
@@ -890,6 +882,15 @@
         console.log(pc.gridRow);
     }
 
+function togglePCs(btn){
+    console.log(n_pc[current_turn]);
+    current_turn += 1;   
+    if(current_turn > n_pc.length-1){
+        current_turn = 0;
+    }
+    movePC(0,0,n_pc[current_turn].style.id)
+    btn.textContent = n_pc[current_turn].textContent;
+}
     
 </script>
 </html>
