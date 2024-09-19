@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sword Chronicle Character Sheet</title>
-    <!-- <script src="sheet.json"></script> -->
+    <title>Grimm Europe Chronicle Character Sheet</title>
+    
     <script src="constants.js" type="module"></script>
     <script src="script.js" type="module"></script>
     <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook&display=swap" rel="stylesheet">
 
 </head>
 <body>
     <head>
-        
+        <!-- <h1 class="unifrakturcook-bold">Grimm Europe Chronicle character sheet</h1> -->
         <nav id="flipper" style="display: flex;">
             <button id="0"></button>
             <button id="1"></button>
@@ -22,10 +26,11 @@
         </nav>
     </head>
     <main>
-        <section id="character_name" style="text-align: center;"><h1 id="name_pc">Namn</h1><hr></section>
-        <section id ="roll_result">Resultat</section>
-        <hr>    
-        <section id ="ability_sheet"></section>
+        <div id="character_name" style="text-align: center;"><h1 id="name_pc">Namn</h1><hr></div>
+        <div style="display: flex; flex-direction: row;">
+            <div id ="roll_result">Resultat</div>
+            <div id ="ability_sheet">Abilities</div>
+        </div>    
     </main>
     </body>
     </html>

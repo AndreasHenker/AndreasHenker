@@ -3,7 +3,7 @@
 export const abilities = {
     abilityList: ["Agility", "Animal_Handling", "Athletics", "Awareness", "Cunning", "Deception", "Endurance", "Fighting", "Healing", "Knowledge", "Marksmanship", "Persuasion", "Status", "Stealth", "Survival", "Thievery", "Warfare","Will", "Language"],
     "Agility": ["Acrobatics", "Balance", "Contortions", "Dodge", "Quickness"],
-    "Animal_Handling": ["Charm", "Drive", "Ride", "Train"],
+    "Animal_Handling": ["A_Charm", "Drive", "Ride", "Train"],
     "Athletics":["Climb", "Jump", "Run", "Strength", "Swim", "Throw"],
     "Awareness": ["Empathy", "Notice"],
     "Cunning": ["Decipher", "Logic", "Memory"],
@@ -133,22 +133,6 @@ if (matches) {
 return [];
 }
 
-//returned value [0,1,2,3,4,5,6,7] must be converted to [ [0,1,2], [3,4,5], [6,7,X] ] --> x,dX,mod
-/* 
-
-deconstructing strings, arrays and objects
-
-take returned value
-check its length = n
-check 1st post if it is a number, store it in A [ [A][][] ,[][][],  ]
-check if number --> store value 
-check if letter --> go to next position
-check if + or -  then check if next is number then check if next IS NOT letter -->
-                    multiply by +/-1 --> store value
-                if LETTER --> ADD "0" to C and start over with new Group
-
-
-*/
 const inputString = "12times   6+ - -12"; //[x=0, dX=1, mod=0] (default values)
 const separatedValues = diceConverter(inputString);
 console.log(parseInt(separatedValues[0])+"d"+parseInt(separatedValues[1])+"+"+parseInt(separatedValues[2]));

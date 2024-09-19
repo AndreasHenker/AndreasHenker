@@ -78,7 +78,7 @@ function start(y){
   main(current_pc);
 }
 
-start(2);
+//start(2);
 
 for (let i=0; i < party.length; i++){
   let pc_btn = document.getElementById(i)
