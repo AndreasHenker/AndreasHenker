@@ -63,7 +63,7 @@ ul {
 
 .char:hover{
     opacity: 1;
-    background-color: rgb(251, 219, 9);
+    background-color: rgb(221, 209, 130);
 }
 
 .pc {
@@ -166,8 +166,12 @@ ul {
 
 #addNPC_btn{
     background-color: red;
+    border-radius: 5%;
+    color: beige
 }
 
 #addPC_btn{
     background-color: blue;
+    border-radius: 5%;
+    color: beige
 }
