@@ -2,6 +2,18 @@ body {
     background-color: darkgrey;
 }
 
+ul {
+    list-style-type: none;
+}
+
+#rosterlist {
+    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
 #battlemap {
     display: grid;
     grid-template-columns: 1032px;
@@ -16,17 +28,18 @@ body {
     display: grid;
     grid-template-columns: repeat(32, 1fr);
     grid-template-rows: repeat(25, 1fr);
+    z-index: 20;
 }
 
 .battlesquare {
-    opacity: 0.2;
-    color: white;
-    border: rgb(243, 236, 236) 1px solid;
+    opacity: 0.4;
+    border: rgb(243, 236, 236) 1px dotted;    
 }
 
 .battlesquare:hover{
-    opacity: 1;
-    background-color: red;
+    opacity: 0.8;
+    z-index: 20;
+    background-color: aliceblue;
 }
 
 #player_layer{
@@ -37,24 +50,47 @@ body {
     grid-template-columns: repeat(32, 1fr);
     grid-template-rows: repeat(25, 1fr);
     
-        z-index: 4;
+    z-index: 4;
     opacity: .7;
 }
 
 .char {
+    font-size: 8px;
     border-radius: 50%;
     color: white;
     display: none;
 }
 
-#pc1 {
+.char:hover{
+    opacity: 1;
+    background-color: rgb(251, 219, 9);
+}
+
+.pc {
     background-color: rgb(26, 70, 244);
+}
+
+.npc {
+    background-color: red;
+}
+
+.pointer {
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: 10;
+    background-color: white;
+}
+
+#pointer{
+    grid-column: 15;
+    grid-row: 12;
+}
+
+#pc1 {
     grid-column: 2;
     grid-row: 2;
-    
 }
 #npc1 {
-    background-color: red;
     grid-column: 1;
     grid-row: 1;
 }
@@ -62,10 +98,10 @@ body {
 
 
 #map {
+    opacity: 1;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
 }
-
 
 #menu {
     background-color: beige;
@@ -76,8 +112,8 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
 }
 
 .joycontrol {
@@ -89,37 +125,49 @@ body {
     grid-column: 2;
     grid-row: 1;
 }
+
 #down{
     grid-column: 2;
     grid-row: 3;
 }
 #left{
     grid-column: 1;
-    grid-row: 2;
-    
+    grid-row: 2;   
 }
 #right{
     grid-column: 3;
     grid-row: 2;
-
 }
 #upleft{
     grid-column: 1;
     grid-row: 1;
-    
 }
 #upright{
     grid-column: 3;
     grid-row: 1;
-
 }
 #downleft{
     grid-column: 1;
     grid-row: 3;
-    
 }
 #downright{
     grid-column: 3;
     grid-row: 3;
+}
 
+#roster{
+    color:brown;
+}
+
+.rosteritem{
+    background-color: rgb(209, 171, 244);
+    margin: 0.2rem;
+}
+
+#addNPC_btn{
+    background-color: red;
+}
+
+#addPC_btn{
+    background-color: blue;
 }

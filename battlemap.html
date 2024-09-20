@@ -815,48 +815,116 @@
                 <div id="bsqr800" class="battlesquare">800</div>             
             </div>
         
-            <div id="map"><img src="./maps/ambush01.jpg" width="1032" height="768" onload = "window.alert('Map Size: \n' +this.naturalWidth+'x'+this.naturalHeight)";></div>
+            <!-- <div id="map"><img id="map_img" src="./maps/ambush01.jpg" width="1032" height="768" onload = "window.alert('Map Size: \n' +this.naturalWidth+'x'+this.naturalHeight)";></div> -->
+            <div id="map"><img id="map_img" src="./maps/ambush01.jpg" width="1032" height="768"></div>
             <!-- 1032px*774px -->
         
             <div id="player_layer">
                 <div id ="pc1" class="char pc">PC</div>
                 <div id ="npc1" class="char npc">NPC</div>
+                <div id ="pointer" class="pointer"></div>
             </div>
-        
+            
         </div>
         <div id="control">
             <nav id="joystick">
-                <button id="up" class="joycontrol" onclick="movePC(0,-1, `#${n_pc[current_turn].id}`)">up</button>
-                <button id="down" class="joycontrol" onclick="movePC(0,1, `#${n_pc[current_turn].id}`)">down</button>
-                <button id="left" class="joycontrol" onclick="movePC(-1,0, `#${n_pc[current_turn].id}`)">left</button>
-                <button id="right" class="joycontrol" onclick="movePC(1,0, `#${n_pc[current_turn].id}`)">right</button>
-                <button id="upleft" class="joycontrol" onclick="movePC(-1,-1, `#${n_pc[current_turn].id}`)">\</button>
-                <button id="upright" class="joycontrol" onclick="movePC(1,-1, `#${n_pc[current_turn].id}`)">/</button>
-                <button id="downright" class="joycontrol" onclick="movePC(1,1, `#${n_pc[current_turn].id}`)">\</button>
-                <button id="downleft" class="joycontrol" onclick="movePC(-1,1, `#${n_pc[current_turn].id}`)">/</button>
+                <button id="up" class="joycontrol" onclick="movePC(0,-1, `#${n_pc[current_char].id}`)">up</button>
+                <button id="down" class="joycontrol" onclick="movePC(0,1, `#${n_pc[current_char].id}`)">down</button>
+                <button id="left" class="joycontrol" onclick="movePC(-1,0, `#${n_pc[current_char].id}`)">left</button>
+                <button id="right" class="joycontrol" onclick="movePC(1,0, `#${n_pc[current_char].id}`)">right</button>
+                <button id="upleft" class="joycontrol" onclick="movePC(-1,-1, `#${n_pc[current_char].id}`)">\</button>
+                <button id="upright" class="joycontrol" onclick="movePC(1,-1, `#${n_pc[current_char].id}`)">/</button>
+                <button id="downright" class="joycontrol" onclick="movePC(1,1, `#${n_pc[current_char].id}`)">\</button>
+                <button id="downleft" class="joycontrol" onclick="movePC(-1,1, `#${n_pc[current_char].id}`)">/</button>
                 <button id="select_PC" class="joycontrol" onclick="togglePCs(this)">PC</button>
             </nav>
             <div id="menu">
-                <input type="checkbox" id="toggle_grid" checked="true" name="show_grid" value="checked" onchange="toggle_grid(this)">
-                <label for="show_grid">Show grid</label><br>
+                <input type="checkbox" id="toggle_grid" checked="true" name="show_grid" value="checked" onchange="toggle_grid()">
+                <label for="show_grid">Grid</label>
+            </div>
+            <hr>
+            <div id="roster">
+                <ul id="roster_list">
+                    <li><h3>Roster</h3><li>
+                    <li><button id="addNPC_btn" onclick="add_to_roster('npc')">add foe</button></li>
+                    <li><button id="addPC_btn" onclick="add_to_roster('pc')">add ally</button></li>
+                </ul>
             </div>
         </div>
+        
 </div>
 </body>
 <script>
-    let n_pc = document.querySelectorAll(".char");
-    let current_turn = 0;
+let n_pc = document.querySelectorAll(".char");
+let current_char = 0;
 
-    function toggle_grid(element){
-        let grid = document.getElementById("battlegrid");
-        if (element.checked){grid.style.display = "grid";}
-        else{grid.style.display = "none";}
+
+let b_squares = document.querySelectorAll(".battlesquare");
+let counter = 1;
+
+b_squares.forEach(sqr => {
+    let x = counter%32;
+    let y = Math.floor((counter-1)/32)+1;
+    if (x == 0){x = 32;}
+
+    sqr.textContent = ``;
+    sqr.style.gridColumn = x;
+    sqr.style.gridRow = y;
+
+    sqr.addEventListener("dblclick", movePointer(x, y));
+    //console.log(counter);
+    counter ++;
+});
+
+
+
+
+function movePointer(col, ro){
+    console.log(col +"/"+ ro);
+    //console.log(b_square.style.gridArea);
+}
+
+function toggle_grid(){
+    let grid = document.getElementById("battlegrid");
+    let check_grid = document.getElementById("toggle_grid");
+    
+    if (check_grid.checked){grid.style.zIndex = 20;}
+    else{grid.style.zIndex = -20;}
+    //if (!check_pointer.checked & !check_grid.checked){grid.style.zIndex = -10;}
+}
+
+let current_MV = 0;
+let max_MV = 4;
+
+function countMV(x = 0, y = 0, max = max_MV){
+    let total_MV = max - current_MV;
+    if (x != 0 || y != 0){
+        if (x != 0 & y != 0){
+            console.log("Welcome to Diagon-Alley!");
+            total_MV -= 1.5;
+            console.log("Moves left: "+ total_MV + " of "+max);
+            return 1.5
+
+        }
+        else{
+            total_MV -= 1;
+            console.log("Moves left: "+ total_MV + " of "+max);
+            return 1
+        }
     }
+    else{
+        console.log("No movement detected...");
+        console.log("Moves left: "+ total_MV + " of "+max);
+        return 0
+    }
+}
 
-    function movePC(x = 1, y = 1, n_pc = "#pc1"){
-        let pc = document.querySelector(n_pc).style;
-        let pc_x = pc.gridColumn;
-        let pc_y = pc.gridRow;
+
+function movePC(x = 0, y = 0, n_pc = "#pc1"){
+    let pc = document.querySelector(n_pc).style;
+    let pc_x = pc.gridColumn;
+    let pc_y = pc.gridRow;
+    if (current_MV < max_MV){
 
         if (!pc_x){
             console.log("No column")
@@ -878,19 +946,61 @@
             else {pc.gridRow = `${parseInt(pc_y)+y}`;}
         }
         
-        console.log(pc.gridColumn);
-        console.log(pc.gridRow);
+        if (x != 0 || y != 0) {
+            current_MV += countMV(x,y,5);
+        }
     }
+    else{console.log("Out of moves, punk!")}
+    console.log(pc.gridColumn+"/"+pc.gridRow);
+}
 
 function togglePCs(btn){
-    console.log(n_pc[current_turn]);
-    current_turn += 1;   
-    if(current_turn > n_pc.length-1){
-        current_turn = 0;
+    console.log(n_pc[current_char]);
+    console.log(n_pc);
+    current_char += 1;   
+    if(current_char > n_pc.length-1){
+        current_char = 0;
     }
-    movePC(0,0,n_pc[current_turn].style.id)
-    btn.textContent = n_pc[current_turn].textContent;
+    movePC(0,0,n_pc[current_char].style.id)
+    btn.textContent = n_pc[current_char].textContent;
+    current_MV = 0;
 }
+
+function generateRoster(){
+    let roster = document.querySelector("#roster");
+    for(let i = 0; i < n_pc.length; i++){  
+        roster.innerHTML += `<div>${i+1}: <input id="roster${i+1}" class="rosteritem" type="text" placeholder="${n_pc[i].textContent}"><input type="checkbox" id="name_lock${i+1}" name="roster${i+1}" onchange="lockName('roster${i+1}')"></div>`
+    }
+}
+
+function add_to_roster(char_type = "npc"){
+    let i = (document.querySelectorAll(".rosteritem")).length;
+    console.log(i);
+    if(char_type == "npc"){
+        document.querySelector("#player_layer").innerHTML += `<div id ="npc${i+1}" class="char ${char_type}">NPC${i+1}</div>`
+        document.querySelector("#roster").innerHTML += `<div>${i+1}: <input id="roster${i+1}" class="rosteritem" type="text" placeholder="N/PC ${i+1}">NPC ${i+1}<input type="checkbox" id="name_lock${i+1}" name="roster${i+1}" onchange="lockName('roster${i+1}')"></div>`
+    }
     
+    else {
+            
+        document.querySelector("#roster").innerHTML += `<div>${i+1}: <input id="roster${i+1}" class="rosteritem" type="text" placeholder="PC ${i+1}">Ally ${i+1}<input type="checkbox" id="name_lock${i+1}" name="roster${i+1}" onchange="lockName('roster${i+1}')"></div>`
+        document.querySelector("#player_layer").innerHTML += `<div id ="pc${i+1}" class="char ${char_type}">PC ${i+1}</div>`
+    }
+     
+    n_pc = document.querySelectorAll(".char");
+}
+
+function lockName(element_id){
+    let element = document.getElementById(element_id);
+    //window.alert(": "+element.value);
+    if(element.value != ""){
+        element.placeholder = element.value;
+        indX = parseInt(element.id.slice(6));
+        n_pc[indX-1].textContent = element.value;
+        console.log(n_pc[indX-1]);
+    }
+}
+
+generateRoster();    
 </script>
 </html>
