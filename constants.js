@@ -57,7 +57,7 @@ export function abilitiesAndSpecialities(ability = 1){
 
 
 //rollAndKeep
-export function rollAndKeep(ability, stat = 2, spec = 0, bonus = 0, mod = 0, dX = 6){
+export function rollAndKeep(id, ability, stat = 2, spec = 0, bonus = 0, mod = 0, dX = 6){
   stat = parseInt(stat); //number of dice from stat
   spec = parseInt(spec); //number of dice from speciality
   bonus = parseInt(bonus); //number of bonus dice
@@ -70,7 +70,7 @@ export function rollAndKeep(ability, stat = 2, spec = 0, bonus = 0, mod = 0, dX 
   let discardedRoll = [];
 
   let result_area = document.getElementById("roll_result");
-  let result_string = ""+ability+"\n";
+  let result_string = ""+id+"\n";
   if (spec + bonus < stat){
     roll_times = stat + spec + bonus;
     //window.alert(roll);

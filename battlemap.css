@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: darkgrey;
 }
@@ -13,6 +18,10 @@ ul {
     flex-direction: row;
 }
 
+.counter {
+    text-align: center;
+    color: black;
+}
 
 #battlemap {
     display: grid;
@@ -32,13 +41,14 @@ ul {
 }
 
 .battlesquare {
-    opacity: 0.4;
+    opacity: 0.1;
     border: rgb(243, 236, 236) 1px dotted;    
 }
 
 .battlesquare:hover{
     opacity: 0.8;
     z-index: 20;
+    color: aliceblue;
     background-color: aliceblue;
 }
 
@@ -165,13 +175,19 @@ ul {
 }
 
 #addNPC_btn{
-    background-color: red;
+    background-color: rgb(244, 133, 133);
     border-radius: 5%;
     color: beige
 }
 
 #addPC_btn{
-    background-color: blue;
+    background-color: rgb(113, 113, 236);
     border-radius: 5%;
     color: beige
+}
+
+#battlegrid:nth-child(even){
+    position: relative;
+    left: 16 px;
+    background-color: brown;
 }

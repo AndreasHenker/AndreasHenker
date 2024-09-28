@@ -13,18 +13,26 @@ function main(current_player)
     let char_sheet = document.getElementById("ability_sheet");
     let ability_class_str = "."+ability;
     let currentAbility ="";
-
+/*
     currentAbility +=  `<div><details><summary>
     <button id="${ability}" type='roll' class='sheet-ability' style="width:210px;" value='2'>${ability}</button>
     </summary>`;
     let i = 0;
     abilities[ability].forEach(element => {
       currentAbility += `<button id = "${element}" type='roll' class='sheet-ability speciality ${ability}' style="width:150px;" value='${player[ability][i]}'>${element}</button>`;
+      currentAbility +=  `</details></div>`;
+    
+*/   
+
+    currentAbility +=  `<div class="ab-wrap">
+    <button id="${ability}" type='roll' class='sheet-ability base-ability' style="width:210px;" value='2'>${ability}</button>`;
+    let i = 0;
+    abilities[ability].forEach(element => {
+      currentAbility += `<button id ="${element}" type='roll' class='sheet-ability speciality ${ability}' style="width:150px;" value='${player[ability][i]}'>${element}</button>`;
       i += 1;      
     });
     
-    currentAbility +=  `</details></div>`;
-    char_sheet.innerHTML +=  currentAbility;
+    char_sheet.innerHTML +=  `</div>${currentAbility}`;
 
   }
 
@@ -32,10 +40,10 @@ function main(current_player)
     let ability_class_str = "."+ability; 
     let rollAbilityEl = document.getElementById(ability);
     
-    rollAbilityEl.addEventListener("click", function(){rollAndKeep(ability, rollAbilityEl.value);});
+    rollAbilityEl.addEventListener("click", function(){rollAndKeep(this.id, ability, rollAbilityEl.value);});
     document.querySelectorAll(ability_class_str).forEach(item => {
         item.addEventListener("click", event => {
-          {rollAndKeep(document.getElementById(ability).id, document.getElementById(ability).value, item.value);}
+          {rollAndKeep(item.id, document.getElementById(ability).id, document.getElementById(ability).value, item.value);}
         })
       })
     }
@@ -45,7 +53,7 @@ function main(current_player)
       create_ability_sheet(element, current_player);
       let i = abilities.abilityList.indexOf(element);
       document.getElementById(element).value = current_player.abilityList[i];
-      if (Math.max(...current_player[element]) > 0){document.getElementById(element).style.color = "red";}
+      if (Math.max(...current_player[element]) > 0){document.getElementById(element).style.color = "lightgray";}
   });
 
   abilities.abilityList.forEach(element => {
@@ -62,15 +70,21 @@ function main(current_player)
     <h6>Movement ${(current_player.mv - current_player.armor_bulk)}</h6>
   </div>`
 
-  let total_abilities = document.querySelectorAll(".sheet-ability");
+  function populateButtons(type = ".speciality"){
+    
+    let total_abilities = document.querySelectorAll(type);
 
-  total_abilities.forEach(element => { 
-      let current = document.getElementById(element.id);
-      current.innerHTML += ` (${element.value})`;
-      if (element.value == "0"){
-          current.style.display = "none";
-        }
-});
+    total_abilities.forEach(element => { 
+        let current = document.getElementById(element.id);
+        current.innerHTML += ` (${element.value})`;
+        if (element.value == "0"){
+            current.style.display = "none";
+          }
+    });
+  }
+  populateButtons(".base-ability");
+  populateButtons(".speciality");
+
 }
 
 function start(y){
